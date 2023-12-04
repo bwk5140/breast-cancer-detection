@@ -13,13 +13,12 @@
 # limitations under the License.
 import streamlit as st
 from PIL import Image
-import tensorflow as tf
 import numpy as np
-import streamlit as st
+import pydicom
 from streamlit.logger import get_logger
 
 # Load the pre-trained model
-#model = tf.keras.models.load_model('path/to/your/pretrained_model.h5')
+# model = tf.keras.models.load_model('path/to/your/pretrained_model.h5')
 
 # Function to preprocess the image before feeding it to the model
 def preprocess_image(image):
@@ -34,6 +33,13 @@ def predict(image):
     prediction = model.predict(processed_image)
     return prediction
 
+# Function for additional analysis on the uploaded image
+def analyze_image(image):
+    # Add your custom analysis or processing logic here
+    # For example, you could perform image processing, feature extraction, etc.
+    # Display the results or additional information
+    st.write("Additional analysis results or charts can be displayed here.")
+
 # Streamlit app
 def main():
     st.title("Breast Cancer Detection App")
@@ -43,12 +49,18 @@ def main():
 
     st.sidebar.success("Select a demo above.")
 
-
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png", "dcm"])
 
     if uploaded_file is not None:
-        # Display the uploaded image
-        image = Image.open(uploaded_file)
+        # Handle DICOM files
+        if uploaded_file.type == "application/dicom":
+            dicom_image = pydicom.dcmread(uploaded_file)
+            image_array = dicom_image.pixel_array
+            image = Image.fromarray(image_array)
+        else:
+            # Display the uploaded image
+            image = Image.open(uploaded_file)
+
         st.image(image, caption="Uploaded Image.", use_column_width=True)
 
         # Make predictions when the 'Predict' button is clicked
@@ -58,14 +70,12 @@ def main():
                 st.success("The model predicts that this image contains signs of breast cancer.")
             else:
                 st.success("The model predicts that this image does not contain signs of breast cancer.")
-LOGGER = get_logger(__name__)
 
+        # Add an "Analyze" button to perform additional analysis on the uploaded image
+        analyze_button = st.button("Analyze")
+        if analyze_button:
+            st.info("Performing additional analysis on the uploaded image...")
+            analyze_image(image)
 
-
-  
-  
 if __name__ == "__main__":
     main()
-
-
-
