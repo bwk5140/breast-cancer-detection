@@ -44,16 +44,14 @@ def analyze_image(image):
 def main():
     st.title("Breast Cancer Detection App")
     st.write(
-        "This app uses a deep learning model to predict whether an uploaded image contains signs of breast cancer."
+        "This app uses a deep learning model to predict whether an uploaded image contains signs of breast cancer. \n"
+        "Disclaimer: This application is for educational and informational purposes only.  "
+        "It is not intended to replace professional medical advice, diagnosis, or treatment.  "
+        "Always consult with a qualified healthcare professional for medical guidance."
+        "This should be served as a second opinion."
     )
 
-    # Add a disclaimer message
-    st.sidebar.warning(
-        "Disclaimer: This application is for educational and informational purposes only. "
-        "It is not intended to replace professional medical advice, diagnosis, or treatment. "
-        "Always consult with a qualified healthcare professional for medical guidance."
-        "Serve as a second opinion."
-    )
+    
 
     st.sidebar.success("Select a demo above.")
 
