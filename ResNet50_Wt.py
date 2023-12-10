@@ -194,7 +194,9 @@ num_epochs = 100
 if __name__ == '__main__':
     freeze_support()
     x, y, epochs = train_model(model, train_dataloader, test_dataloader, optimizer, num_epochs)
-    
+   
+    torch.save(model.state_dict(), 'model.pth')
+
     #Plot test accuracy against epochs
     plt.plot(epochs, x)
     plt.xlabel('Epochs')
