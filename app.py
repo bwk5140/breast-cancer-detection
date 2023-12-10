@@ -16,10 +16,14 @@ from PIL import Image
 import tensorflow as tf
 import numpy as np
 from streamlit.logger import get_logger
+from ResNet50_Wt import ChainedModel
+import torch
 
 # Load the pre-trained model
 # model = tf.keras.models.load_model('path/to/your/pretrained_model.h5')
-
+model = ChainedModel()
+model.load_state_dict(torch.load('model.pth', map_location = torch.device('cpu')))
+model.eval()
 # Function to preprocess the image before feeding it to the model
 def preprocess_image(image):
     image = image.resize((224, 224))
