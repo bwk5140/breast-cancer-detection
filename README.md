@@ -21,7 +21,7 @@ from torchvision.transforms.functional import InterpolationMode
 from torchvision.transforms import v2
 from torch.utils.data import Dataset, DataLoader
 
-# import libraries
+## Import Libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -54,7 +54,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 ************************************************************************
 
-Getting started
+## Getting Started
 .........................................................................
 -In  a terminal window, enter python Convert_dicom_to_png.py -dicomPath(or dir) -pngPath(or dir). Include the -f flag for folder conversions. Convert_dicom_to_png.py -f -dicomdir -pngdir.
 -Replace the necessary directories in MammoData.py with your own. We recommend working with "INBREAST" contains high quality images with the relevant Metadata.
