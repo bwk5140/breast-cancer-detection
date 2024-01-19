@@ -1,4 +1,4 @@
-# CMPSC445 Final
+# Detecting Breast Cancer
 
 This project focuses on detecting breast cancer in high density breast tissue with mammogram images.
 
